@@ -4,8 +4,8 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
-        AWS_REGION = 'us-east-2'
-        BUCKET_NAME = 'drk-s3bucket-east'
+        AWS_REGION = 'us-east-1'
+        BUCKET_NAME = 'my-unique-bucket-name'
     }
 
     stages {
@@ -15,8 +15,8 @@ pipeline {
                     // Install AWS CLI if not already installed
                     if (!fileExists('/usr/local/bin/aws')) {
                         sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
-                        sh 'unzip awscliv2.zip'
-                        sh ' ./aws/install'
+                        sh 'unzip -o awscliv2.zip'
+                        sh 'sudo ./aws/install'
                     }
                 }
             }
