@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'amazonlinux:2'
+            args '-u root' // Run as root user
+        }
+    }
 
     environment {
         AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
@@ -14,9 +19,10 @@ pipeline {
                 script {
                     // Install AWS CLI if not already installed
                     if (!fileExists('/usr/local/bin/aws')) {
+                        sh 'yum install -y unzip'
                         sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
                         sh 'unzip -o awscliv2.zip'
-                        sh 'sudo ./aws/install'
+                        sh './aws/install'
                     }
                 }
             }
