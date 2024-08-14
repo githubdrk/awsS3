@@ -16,7 +16,6 @@ pipeline {
                     if (!fileExists('/usr/local/bin/aws')) {
                         sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
                         sh 'unzip awscliv2.zip'
-                        sh 'chmod +X /aws/install'
                         sh ' ./aws/install'
                     }
                 }
